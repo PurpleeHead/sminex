@@ -1,0 +1,73 @@
+.custom-checkbox {
+  $root: &;
+
+  &__field {
+    &:checked + #{$root}__label {
+      color: $color-jaguar;
+      transition: color 0.3s ease-in-out;
+    }
+  }
+  &__field {
+    &:checked + #{$root}__label::after {
+      display: block;
+    }
+
+    &:invalid + #{$root}__label {
+      color: $color-orange-red;
+
+      &::before {
+        border-color: $color-orange-red;
+      }
+    }
+  }
+
+  &__label {
+    position: relative;
+    padding: 0 0 0 19px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba($color-jaguar, 0.3);
+    user-select: none;
+    transition: color 0.3s ease-in-out;
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      height: 12px;
+      width: 12px;
+      border: 1px solid $color-jaguar;
+      display: flex;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: border-color 0.7s ease, background-color 0.2s ease;
+    }
+
+    &::after {
+      content: "";
+      height: 8px;
+      width: 8px;
+      background-color: $color-jaguar;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 2px;
+      animation: slideUp 0.7s ease;
+      display: none;
+    }
+  }
+
+  &__field:invalid + &__label {
+    color: $color-orange-red;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
